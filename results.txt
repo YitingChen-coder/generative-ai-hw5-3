@@ -1,0 +1,272 @@
+HW 5-3 actual execution log
+
+Initial environment: macOS arm64; default Python 3.9.6; Ollama not installed; localhost:11434 unavailable.
+Initial uv Python download and brew install failed because HTTP_PROXY/HTTPS_PROXY/ALL_PROXY pointed to an inactive proxy at 127.0.0.1:7897. Direct HTTPS worked. Retried downloads with those variables removed only in child processes.
+Found existing Python 3.13.11 and created .venv. Installed ollama 0.6.3 and chromadb 1.5.9.
+
+=== Compatibility run: /usr/bin/python3 demo.py (Python 3.9.6) ===
+  File "/Users/yiting/Downloads/lec_5_files (1)/demo.py", line 63
+    '''
+       ^
+SyntaxError: f-string expression part cannot include a backslash
+
+Exit code: 1
+
+=== Download exact original model: hf.co/CompendiumLabs/bge-base-en-v1.5-gguf ===
+verifying sha256 digest 
+writing manifest 
+success 
+
+Exit code: 0
+
+=== Download exact original model: hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF ===
+verifying sha256 digest ⠋ pulling manifest 
+verifying sha256 digest ⠙ pulling manifest 
+verifying sha256 digest ⠹ pulling manifest 
+verifying sha256 digest ⠸ pulling manifest 
+verifying sha256 digest 
+writing manifest 
+success 
+
+Exit code: 0
+
+[Terminal progress animation omitted from model downloads.]
+
+=== Successful setup verification ===
+$ /Users/yiting/Downloads/lec_5_files (1)/.venv/bin/python --version
+Python 3.13.11
+Exit code: 0
+$ ollama --version
+ollama version is 0.40.13
+Exit code: 0
+$ ollama list
+NAME                                                 ID              SIZE      MODIFIED           
+hf.co/bartowski/Llama-3.2-1B-Instruct-GGUF:latest    b317c92f9770    807 MB    12 seconds ago        
+hf.co/CompendiumLabs/bge-base-en-v1.5-gguf:latest    249324cc2e7a    68 MB     About a minute ago    
+Exit code: 0
+
+=== demo.py | 2026-11-02T21:06:53.226711-06:00 ===
+Command: .venv/bin/python -u demo.py
+Input question: What does the professor of MPCS57200 work on?
+Loaded 7 entries
+Added chunk 1/7 to the database
+Added chunk 2/7 to the database
+Added chunk 3/7 to the database
+Added chunk 4/7 to the database
+Added chunk 5/7 to the database
+Added chunk 6/7 to the database
+Added chunk 7/7 to the database
+Ask me a question: Retrieved knowledge:
+ - (similarity: 0.74) The Professor of MPCS57200 works in AI safety
+
+ - (similarity: 0.69) MPCS57200 students are the smartest and hardest working MPCS students
+
+ - (similarity: 0.68) MPCS57200 is the Generative AI class
+
+Without RAG
+Chatbot response:
+I'm a large language model, I don't have have access to a specific course or academic program, but I can try to provide some general information about the topic.
+
+MPCS57200 likely refers to a course or program offered by a university or college that deals with the basics of computer programming, software development, or other related topics.
+
+The professor of MPCS57200 is likely to be a qualified computer science professor who has expertise in teaching programming concepts and skills to students. Their research and teaching focus may be on:
+
+1. Programming languages, such as Java, Python, or C++
+2. Data structures and algorithms
+3. Software development methodologies
+4. Computer systems and architecture
+5. Programming paradigms, such as object-oriented programming or functional programming
+
+Some possible topics that the professor might cover in a course like MPCS57200 include:
+
+* Introduction to programming concepts
+* Basic programming syntax and data types
+* Object-oriented programming and data structures
+* Algorithms and data structures
+* Software design patterns and principles
+* Programming for beginners or non-technical audiences
+
+Please note that this is just speculation, and I don't have any specific information about the professor or course. If you have any more information or context, I'll do my best to help!
+
+With RAG
+Chatbot response:
+The Professor of MPCS57200 works on ensuring the safe development of generative AI models, as well as developing and teaching courses on the subject.
+Exit code: 0
+
+=== demo_chroma.py | 2026-11-02T21:07:07.034981-06:00 ===
+Command: .venv/bin/python -u demo_chroma.py
+Input question: What does the professor of MPCS57200 work on?
+Loaded 7 entries
+Added chunk 1/7 to the database
+Added chunk 2/7 to the database
+Added chunk 3/7 to the database
+Added chunk 4/7 to the database
+Added chunk 5/7 to the database
+Added chunk 6/7 to the database
+Added chunk 7/7 to the database
+Ask me a question: Retrieved knowledge:
+ - (similarity: 0.74) The Professor of MPCS57200 works in AI safety
+
+ - (similarity: 0.69) MPCS57200 students are the smartest and hardest working MPCS students
+
+ - (similarity: 0.68) MPCS57200 is the Generative AI class
+
+Without RAG
+Chatbot response:
+The professor of MPCS57200, which is likely "Machine Learning and Python Programming" or another similar course, is likely to work on projects and assignments related to machine learning and Python programming. Some possible topics that they might work on include:
+
+1. Developing machine learning models using popular libraries such as scikit-learn, TensorFlow, or PyTorch.
+2. Implementing data preprocessing, feature engineering, and model selection techniques.
+3. Creating and training datasets, and evaluating their performance using metrics such as accuracy, precision, and recall.
+4. Building and deploying machine learning models using cloud platforms like AWS, Azure, or Google Cloud.
+5. Exploring and applying various techniques for model interpretability, explainability, and visualization.
+6. Investigating the limitations and challenges of machine learning, and proposing solutions to address them.
+7. Conducting research on emerging applications of machine learning, such as natural language processing, computer vision, or recommender systems.
+
+The specific work that the professor does will likely depend on the course syllabus, the course content, and the needs of the students.
+
+With RAG
+Chatbot response:
+The Professor of MPCS57200 works on ensuring the safety of the Generative AI models that are being taught in the class.
+Exit code: 0
+
+=== demo.py | 2026-11-02T21:07:08.849203-06:00 ===
+Command: .venv/bin/python -u demo.py
+Input question: How many students are in MPCS57200?
+Loaded 7 entries
+Added chunk 1/7 to the database
+Added chunk 2/7 to the database
+Added chunk 3/7 to the database
+Added chunk 4/7 to the database
+Added chunk 5/7 to the database
+Added chunk 6/7 to the database
+Added chunk 7/7 to the database
+Ask me a question: Retrieved knowledge:
+ - (similarity: 0.74) MPCS57200 students are the smartest and hardest working MPCS students
+
+ - (similarity: 0.63) It has about 40 students
+
+ - (similarity: 0.63) MPCS57200 is the Generative AI class
+
+Without RAG
+Chatbot response:
+MPCS57200 is a course offered by the University of North Carolina School of the Arts (UNCSA) in Wilmington, North Carolina. Unfortunately, I don't have real-time access to the current student enrollment for this specific course.
+
+However, I can suggest some possible ways to find the current enrollment information for MPCS57200:
+
+1. Check the UNCSA website: You can visit the UNCSA website (uncsa.edu) and search for the course catalog or student information. They may have a list of enrolled students for the current academic year.
+2. Contact UNCSA's administrative office: You can reach out to UNCSA's administrative office (unsa@uncsa.edu) and ask for the current enrollment information for MPCS57200.
+3. Look for course enrollment pages: The UNCSA website may have a page dedicated to course enrollment, where they list the current enrollment numbers for various courses.
+
+I hope this helps! If you have any other questions or need further assistance, feel free to ask!
+
+With RAG
+Chatbot response:
+MPCS57200 is a Generative AI class, and it has about 40 students.
+Exit code: 0
+
+=== demo_chroma.py | 2026-11-02T21:07:10.176099-06:00 ===
+Command: .venv/bin/python -u demo_chroma.py
+Input question: How many students are in MPCS57200?
+Loaded 7 entries
+Added chunk 1/7 to the database
+Added chunk 2/7 to the database
+Added chunk 3/7 to the database
+Added chunk 4/7 to the database
+Added chunk 5/7 to the database
+Added chunk 6/7 to the database
+Added chunk 7/7 to the database
+Ask me a question: Retrieved knowledge:
+ - (similarity: 0.74) MPCS57200 students are the smartest and hardest working MPCS students
+
+ - (similarity: 0.63) It has about 40 students
+
+ - (similarity: 0.63) MPCS57200 is the Generative AI class
+
+Without RAG
+Chatbot response:
+Unfortunately, I don't have real-time access to the enrollment numbers for MPCS57200, which is likely a class on a specific course within a specific program at a particular university. However, I can suggest some alternatives to help you find the answer:
+
+1. **Check the course website**: You can visit the course website or syllabus to look for enrollment information.
+2. **Contact the department or university**: Reach out to the department or university's registrar's office or admissions office to ask about the number of students in the course.
+3. **Check with the course instructor**: If you're familiar with the instructor, you can contact them directly and ask about the enrollment number.
+
+I hope these suggestions help!
+
+With RAG
+Chatbot response:
+MPCS57200 has about 40 students.
+Exit code: 0
+
+=== demo.py | 2026-11-02T21:07:11.484791-06:00 ===
+Command: .venv/bin/python -u demo.py
+Input question: What is the name of the professor of MPCS57200?
+Loaded 7 entries
+Added chunk 1/7 to the database
+Added chunk 2/7 to the database
+Added chunk 3/7 to the database
+Added chunk 4/7 to the database
+Added chunk 5/7 to the database
+Added chunk 6/7 to the database
+Added chunk 7/7 to the database
+Ask me a question: Retrieved knowledge:
+ - (similarity: 0.74) The Professor of MPCS57200 works in AI safety
+
+ - (similarity: 0.68) MPCS57200 students are the smartest and hardest working MPCS students
+
+ - (similarity: 0.68) MPCS57200 is the Generative AI class
+
+Without RAG
+Chatbot response:
+I don't have access to a specific database of professors or courses, including MPCS57200. However, I can suggest some options for you to find the information you're looking for.
+
+You can try searching online for the department or college that the course is from, and look for the faculty members or staff listed for the MPCS57200 course. Many universities and colleges also have online catalogs or course descriptions that you can access.
+
+Additionally, you can try contacting the course instructor or the department's administrative office directly to ask for the professor's name. They should be able to provide you with the information you're looking for.
+
+With RAG
+Chatbot response:
+I don't know the name of the professor of MPCS57200.
+Exit code: 0
+
+=== demo_chroma.py | 2026-11-02T21:07:12.479906-06:00 ===
+Command: .venv/bin/python -u demo_chroma.py
+Input question: What is the name of the professor of MPCS57200?
+Loaded 7 entries
+Added chunk 1/7 to the database
+Added chunk 2/7 to the database
+Added chunk 3/7 to the database
+Added chunk 4/7 to the database
+Added chunk 5/7 to the database
+Added chunk 6/7 to the database
+Added chunk 7/7 to the database
+Ask me a question: Retrieved knowledge:
+ - (similarity: 0.74) The Professor of MPCS57200 works in AI safety
+
+ - (similarity: 0.68) MPCS57200 students are the smartest and hardest working MPCS students
+
+ - (similarity: 0.68) MPCS57200 is the Generative AI class
+
+Without RAG
+Chatbot response:
+I'm happy to help you with your question. However, I need a bit more information from you. Could you please provide more context or details about the course MPCS57200, such as:
+
+* The university or institution that offers the course
+* The department or faculty that teaches the course
+
+With this information, I can try to help you find the name of the professor who teaches MPCS57200.
+
+With RAG
+Chatbot response:
+I don't have any information about the professor's name, and I shouldn't have pretended to know it. The context only mentions that the Professor of MPCS57200 works in AI safety, but it doesn't reveal their name.
+Exit code: 0
+
+=== Final verification ===
+demo.py: original SHA-256 verified (e344cc876838d0cb49e00bbb4689cf4fad57d07fa8d85a330eb51a7f3bd1f0cc)
+mpcs57200-facts.txt: original SHA-256 verified (516c8d7c6549a5c87ae643817641be8f6b8aaf061b735b16e24d50ba5e4c574c)
+All six required deliverables exist and are nonempty.
+All six actual demo runs exited 0, loaded seven chunks, and printed both answer modes.
+The three paired retrieval outputs match, including order and displayed similarity scores.
+Both scripts compile with the project Python.
+Checked 85 packages in 4ms
+All installed packages are compatible
